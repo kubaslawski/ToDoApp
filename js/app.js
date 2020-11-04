@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {getTasks} from "./api/getTasks"
-import {getOperations} from "./api/getOperations"
 import {Task} from "./Task";
 import {NewTask} from "./newTask"
 
 
-const apiKey = "3f803b1b-413e-4c07-8d14-64224e071097"
-const apiUrl = "https://todo-api.coderslab.pl/api/tasks"
 
 const App = () => {
 

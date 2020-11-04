@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import ReactDOM from "react-dom";
 import {API_KEY, API_URL} from "./api/constants";
 import { Operations } from "./Operations";
 import {getOperations} from "./api/getOperations";
