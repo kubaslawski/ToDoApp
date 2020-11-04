@@ -60,6 +60,14 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
             showForm: false
         }))
     }
+
+    const closeTheForm = (e) => {
+        e.preventDefault();
+        setOperation(prev => ({
+            ...prev,
+            showForm: false
+        }))
+    }
         
     return (
         <li key={operation.id} className="list-group-item d-flex justify-content-between align-items-center">
@@ -82,7 +90,7 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
                     style={{width: "12rem"}}/>
             <div className="input-group-append">
                 <button type="submit" onClick={handleChangeOperation} className="btn btn-outline-success"><i className="fas fa-save"></i></button>
-                <button className="btn btn-outline-dark"><i className="fas fa-times false"></i></button>
+                <button type="submit" onClick={closeTheForm} className="btn btn-outline-dark"><i className="fas fa-times false"></i></button>
             </div>
             </div>
             </form>
