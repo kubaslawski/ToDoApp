@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import ReactDOM from "react-dom";
 import {API_KEY, API_URL} from "./api/constants";
 import { Operations } from "./Operations";
 import {getOperations} from "./api/getOperations";
@@ -18,8 +17,8 @@ export const Task = ({title, description, id, status, remove}) => {
 
     const [operations, setOperations] = useState([])
 
+
     const handleEditOperation = (timeSpent) => {
-        console.log(timeSpent)
         setTask(prev => ({
             ...prev,
             timeSpent: timeSpent
@@ -29,7 +28,7 @@ export const Task = ({title, description, id, status, remove}) => {
     const onNewOperation = operation => {
         setOperations(prev => ([
           ...prev,
-          operation
+          operation.data
         ]))
       }
 

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
 import {API_KEY, API_URL} from "./api/constants";
 
-export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
+export const Operation = ({e, onRemoveOperation}) => {
 
 
     const [operation, setOperation] = useState({
@@ -39,7 +39,6 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
 
     const handleChangeOperation = e => {
         e.preventDefault();
-        console.log(time.time)
         fetch(`${API_URL}/operations/${operation.id}`, {
             method: 'PUT',
             headers: {
@@ -78,7 +77,6 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
 
     const closeTheForm = (e) => {
         e.preventDefault();
-        console.log(e)
         setOperation(prev => ({
             ...prev,
             showForm: false

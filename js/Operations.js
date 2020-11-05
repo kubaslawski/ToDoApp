@@ -1,11 +1,8 @@
-import React, {useState, useEffect, useInput} from "react";
-import ReactDOM from "react-dom";
+import React, {useState} from "react";
 import { API_KEY, API_URL } from "./api/constants";
-import { getOperations } from "./api/getOperations";
-import {Operation} from "./Operation"
 
 
-export const Operations = ({taskID, form, setForm, operations, onNewOperation, status, onRemoveOperation, handleEditOperation}) => {
+export const Operations = ({taskID, form, onNewOperation}) => {
 
     const [inputs, setInputs] = useState({
         description: "",
@@ -61,12 +58,6 @@ export const Operations = ({taskID, form, setForm, operations, onNewOperation, s
             </div>
         </form>
         </div>
-        
-
-
-        {/* <ul className="list-group list-group-flush">
-            <Operation operations={operations} onRemoveOperation={onRemoveOperation} handleEditOperation={handleEditOperation}/>
-        </ul> */}
         </>
     )
 }
