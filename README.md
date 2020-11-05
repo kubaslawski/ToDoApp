@@ -1,7 +1,8 @@
 1: Install packages
+npm install
 
 2: Run project
-run npm start
+npm start
 
 3: Open it
 go to http://localhost:3000
