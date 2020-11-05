@@ -24,6 +24,7 @@ export const Operations = ({taskID, form, setForm, operations, onNewOperation, s
 
     const addNewOperation = e => {
         e.preventDefault();
+        inputs.description.length >= 5 ? 
         fetch(`${API_URL}/tasks/${taskID}/operations`, {
             method: 'POST',
             headers: {
@@ -35,6 +36,7 @@ export const Operations = ({taskID, form, setForm, operations, onNewOperation, s
         .then(response => response.json())
         .then(data => onNewOperation(data))
         .catch(e => console.warn(e))
+        : alert("Description must be longer or equal to 5 characters")
     }
 
     return (

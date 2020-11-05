@@ -35,9 +35,10 @@ const App = () => {
     <>
     <NewTask add={onNewTask}/>
     {/* <Task tasks={tasks} remove={onRemoveTask}/>, */}
-    {tasks.map((e, index) =>
-    <Task key={e.id} title={e.title} description={e.description} id={e.id} status={e.status} remove={onRemoveTask}/>
-    )}
+    {tasks.map((e, index) => {
+
+      return <Task key={e.id} title={e.title} description={e.description} id={e.id} status={e.status} remove={onRemoveTask}/>
+    })}
     </>
   )
 }

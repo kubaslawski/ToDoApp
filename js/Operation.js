@@ -4,6 +4,7 @@ import {API_KEY, API_URL} from "./api/constants";
 
 export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
 
+
     const [operation, setOperation] = useState({
         description: e.description,
         timeSpent: e.timeSpent,
@@ -11,9 +12,13 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
         showForm: false 
     })
 
+    const [time, setTime] = useState({
+        time: 0
+    })
+
     const handleChange = (e) => {
         const {name, value} = e.target
-        setOperation(prev => ({
+        setTime(prev => ({
             ...prev,
             [name]: value
         }))
@@ -34,15 +39,25 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
 
     const handleChangeOperation = e => {
         e.preventDefault();
+        console.log(time.time)
         fetch(`${API_URL}/operations/${operation.id}`, {
             method: 'PUT',
             headers: {
                 Authorization: API_KEY,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(operation)
+            body: JSON.stringify({
+                description: operation.description,
+                id: operation.id,
+                showForm: operation.showForm,
+                timeSpent: time.time
+            })
         })
-        .then(handleEditOperation(operation.timeSpent))
+        // .then(handleEditOperation(time.time))
+        .then(setOperation(prev => ({
+            ...prev,
+            timeSpent: time.time
+        })))
         .catch(err => console.warn(err))
     }
 
@@ -63,6 +78,7 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
 
     const closeTheForm = (e) => {
         e.preventDefault();
+        console.log(e)
         setOperation(prev => ({
             ...prev,
             showForm: false
@@ -70,6 +86,7 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
     }
         
     return (
+        <>
         <li key={operation.id} className="list-group-item d-flex justify-content-between align-items-center">
             <div>
             {operation.description}
@@ -80,16 +97,17 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
             </span>
             </div>
             {operation.showForm ? 
-            <form>
+            <form onSubmit={handleChangeOperation}>
             <div className="input-group input-group-sm">
             <input type="number"
-                    name="timeSpent"
+                    id={operation.id}
+                    name="time"
                     onChange={handleChange}
                     className="form-control"
                     placeholder="Spent time in minutes"
                     style={{width: "12rem"}}/>
             <div className="input-group-append">
-                <button type="submit" onClick={handleChangeOperation} className="btn btn-outline-success"><i className="fas fa-save"></i></button>
+                <button type="submit" className="btn btn-outline-success"><i className="fas fa-save"></i></button>
                 <button type="submit" onClick={closeTheForm} className="btn btn-outline-dark"><i className="fas fa-times false"></i></button>
             </div>
             </div>
@@ -107,6 +125,7 @@ export const Operation = ({e, onRemoveOperation, handleEditOperation}) => {
         
             <button type="submit" onClick={handleDeleteOperation} className="btn btn-outline-danger btn-sm"><i className="fas fa-trash"></i></button>
             </div>
-         </li>      
+        </li>   
+        </>   
     )
 }

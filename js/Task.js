@@ -19,6 +19,7 @@ export const Task = ({title, description, id, status, remove}) => {
     const [operations, setOperations] = useState([])
 
     const handleEditOperation = (timeSpent) => {
+        console.log(timeSpent)
         setTask(prev => ({
             ...prev,
             timeSpent: timeSpent
@@ -92,7 +93,6 @@ export const Task = ({title, description, id, status, remove}) => {
         .catch(e => console.warn(e))
     }
 
-    //Operation
     const handleAddOperation = () => {
         if(task.taskStatus == "open"){
             task.taskForm === false ?
@@ -133,10 +133,6 @@ export const Task = ({title, description, id, status, remove}) => {
 
 
             <div>
-            {/* <!-- 
-                Przyciski "Add operation" i "Finish" mają być widoczne 
-                tylko jeżeli status zadania jest "open" 
-            --> */}
             {task.taskStatus == "open" ? <AddOperationButton/> : null}
                 
             <button type="submit" onClick={handleStatusTask} className="btn btn-dark btn-sm">
@@ -144,12 +140,12 @@ export const Task = ({title, description, id, status, remove}) => {
                 <i className="fas fa-archive ml-1"></i>
             </button>
 
-            {operations.length < 1 ? <DeleteButton/> : null}
+            {operations.length < 1 ? <DeleteButton/> : null} 
             </div>
         </div>
         <Operations key={task.taskID} taskID={task.taskID} form={task.taskForm} operations={operations} onNewOperation={onNewOperation} onRemoveOperation={onRemoveOperation} handleEditOperation={handleEditOperation}/>
         {operations.map((e, index) => {
-            return <Operation key={e.id} e={e} onRemoveOperation={onRemoveOperation} handleEditOperation={handleEditOperation}/>
+            return <Operation key={e.id} e={e} onRemoveOperation={onRemoveOperation}/>
         })}
 
         </section>
